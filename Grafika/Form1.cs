@@ -15,5 +15,15 @@ namespace Grafika
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("Start");
+
+            using (Game game = new Game())
+            {
+                game.Run(30, 30);
+            }
+        }
     }
 }
