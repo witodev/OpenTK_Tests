@@ -139,7 +139,8 @@ main()
             objects.Add(new Cube());
             objects.Add(new Cube());
             objects.Add(new Coord());
-
+            objects.Add(new Mesh("file.cdb"));
+            objects[3].Scale = new Vector3(0.001f, 0.001f, 0.001f);
             /** In this function, we'll start with a call to the GL.CreateProgram() function,
              * which returns the ID for a new program object, which we'll store in pgmID. */
             pgmID = GL.CreateProgram();
@@ -231,6 +232,7 @@ main()
 
             int indiceat = 0;
 
+            //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
             foreach (Volume v in objects)
             {
                 GL.UniformMatrix4(uniform_mview, false, ref v.ModelViewProjectionMatrix);
@@ -289,7 +291,7 @@ main()
             foreach (Volume v in objects)
             {
                 v.CalculateModelMatrix();
-                v.ViewProjectionMatrix = cam.GetViewMatrix() * Matrix4.CreatePerspectiveFieldOfView(1.0f, ClientSize.Width / (float)ClientSize.Height, 0.1f, 40.0f);
+                v.ViewProjectionMatrix = cam.GetViewMatrix() * Matrix4.CreatePerspectiveFieldOfView(1.0f, ClientSize.Width / (float)ClientSize.Height, 0.1f, 400.0f);
                 //v.ViewProjectionMatrix = cam.GetViewMatrix() * Matrix4.CreatePerspectiveOffCenter(-ClientSize.Width / 2f, ClientSize.Width / 2f, -ClientSize.Height / 2f, ClientSize.Height / 2f, 1f, 40f);
                 v.ModelViewProjectionMatrix = v.ModelMatrix * v.ViewProjectionMatrix;
             }
@@ -375,6 +377,13 @@ main()
 
             if (e.Mouse.LeftButton == ButtonState.Pressed)
                 cam.AddRotation(e.XDelta, e.YDelta);
+        }
+
+        protected override void OnMouseWheel(MouseWheelEventArgs e)
+        {
+            base.OnMouseWheel(e);
+
+            cam.Radius(e.DeltaPrecise);
         }
     }
 }

@@ -40,8 +40,6 @@ main()
 }";
         #endregion
             
-
-
         // shader program with ids
         int pgmID;
         int vsID;

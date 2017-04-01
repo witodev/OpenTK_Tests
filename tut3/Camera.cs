@@ -11,7 +11,7 @@ namespace tut3
     /// </summary>
     class Camera
     {
-        private float r = 5f;
+        private float r = 10f;
         public Vector3 Position = new Vector3(2f, 2f, 2f);
         public Vector3 Direction = new Vector3((float)Math.PI, 0f, 0f);
         public Vector3 Target = new Vector3(0f, 0f, 0f);
@@ -96,7 +96,7 @@ namespace tut3
             Position = new Vector3(px, py, pz);
 
             var rx = (float)(Math.Sin(horizontalAngle - Math.PI / 2.0f));
-            var ry = (float)(Math.Sin(verticalAngle)); //(float)(0);
+            var ry = (float)(Math.Sin(verticalAngle));
             var rz = (float)(Math.Cos(horizontalAngle - Math.PI / 2.0f));
             Right = new Vector3(rx, ry, rz);
 
@@ -104,6 +104,13 @@ namespace tut3
             Up = Vector3.Cross(Direction, Right);
 
             show();
+        }
+
+        public void Radius(float deltaPrecise)
+        {
+            r += deltaPrecise*MouseSensitivity;
+            AddRotation(0, 0);
+            Console.WriteLine("Radius: " + r);
         }
     }
 }
