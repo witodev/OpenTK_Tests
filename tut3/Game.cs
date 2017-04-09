@@ -232,7 +232,7 @@ main()
 
             int indiceat = 0;
 
-            //GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
+            GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Line);
             foreach (Volume v in objects)
             {
                 GL.UniformMatrix4(uniform_mview, false, ref v.ModelViewProjectionMatrix);
